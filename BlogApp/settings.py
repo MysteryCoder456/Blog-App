@@ -25,7 +25,7 @@ SECRET_KEY = '#&gm58+5rlu@#w9-@9=jk&79p1owx10_vmfd3%^syrbdt7sbi%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysterycoder456.pythonanywhere.com']
 
 
 # Application definition
@@ -118,3 +118,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/home/MysteryCoder456/Blog-App/static'
