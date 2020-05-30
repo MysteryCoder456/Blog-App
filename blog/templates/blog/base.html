@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Base Template{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/styles.css' %}">
+</head>
+<body>
+
+    <div class="sidenav">
+        <a href="#">Home</a>
+        <a href="#">New Blogs</a>
+        <a href="#">Coming Soon</a>
+        <a href="#">Coming Soon</a>
+        <a href="#">Coming Soon</a>
+    </div>
+
+    <div class="main">
+        <h1>MysteryCoder456 Blog Website</h1>
+        {% block main %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>
