@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.validators import MaxLengthValidator
-from django.utils import timezone
 
 
 class BlogList(models.Model):
@@ -14,9 +13,9 @@ class Blog(models.Model):
     blog_list = models.ForeignKey(BlogList, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=50)
+    creationDate = models.DateTimeField()
     content = models.TextField(
-        max_length=250,
+        max_length=500,
         blank=True,
-        validators=[MaxLengthValidator(250)]
+        validators=[MaxLengthValidator(500)]
     )
-    creationDate = models.DateTimeField(default=timezone.now(), blank=True)
