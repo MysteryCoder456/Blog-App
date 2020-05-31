@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Base Template{% endblock %}</title>
+    <title>{% block title %}Base Template{% endblock %} - MC456 Blog Site</title>
     <link rel="stylesheet" type="text/css" href="{% static 'blog/styles.css' %}">
 </head>
 <body>
 
     <div class="sidenav">
         <a href="/">Home</a>
-        <a href="#">New Blogs</a>
+        <a href="/blogs">New Blogs</a>
         <a href="#">Write New Blog</a>
         <a href="#">Coming Soon</a>
         <a href="#">Coming Soon</a>
@@ -19,7 +19,8 @@
 
     <div class="main">
         <h1>MysteryCoder456 Blog Website</h1>
-        <hr size="4">
+        <hr size="5">
+        <br>
         {% block main %}
         {% endblock %}
     </div>

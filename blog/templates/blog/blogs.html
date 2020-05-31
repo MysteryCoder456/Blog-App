@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    New Blogs
+{% endblock %}
+
+{% block main %}
+
+    <h1>New Blogs</h1>
+
+    {% for blog in bloglist.blog_set.all %}
+
+        <hr size="3">
+        <h2>{{blog.title}}</h2>
+        <p>{{blog.content}}</p>
+        <hr size="3">
+
+    {% endfor %}
+
+{% endblock %}
