@@ -33,7 +33,7 @@ html {
 
 .sidenav a:hover {
     animation-name: sidenav-hover;
-    animation-duration: 0.4s;
+    animation-duration: 0.3s;
     background-color: maroon
 }
 
