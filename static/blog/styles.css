@@ -8,12 +8,12 @@
 /* Styles */
 
 html {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Montserrat, Helvetica, Arial;
 }
 
 .sidenav {
     height: 100%;
-    width: 190px;
+    width: 220px;
     position: fixed;
     top: 0;
     left: 0;
@@ -38,6 +38,13 @@ html {
 }
 
 .main {
-    margin-left: 190px;
+    margin-left: 220px;
     padding: 4px 0px 0px 30px;
+}
+
+hr {
+    position: relative;
+    left: -17px;
+    background-color: #BBBBBB;
+    border: none;
 }
