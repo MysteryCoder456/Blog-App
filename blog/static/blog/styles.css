@@ -42,10 +42,17 @@ html {
     padding: 4px 0px 0px 30px;
 }
 
+/* Tag Styles */
+
 hr {
     position: relative;
     left: -17px;
     background-color: #BBBBBB;
     border: none;
     width: 102%;
+}
+
+h4 {
+    color: #4B4B4B;
+    padding: -10px 0px -10px 0px;
 }

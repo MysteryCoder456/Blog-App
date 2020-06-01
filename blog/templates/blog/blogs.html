@@ -9,12 +9,15 @@
     <h1>New Blogs</h1>
 
     {% for blog in bloglist.blog_set.all %}
-
         <hr size="3">
-        <h2>{{blog.title}}</h2>
-        <p>{{blog.content}}</p>
-        <hr size="3">
+        <br>
 
+        <h1>{{blog.title}}</h1>
+        <h4>By {{blog.author}} on {{blog.creation_date}}</h4>
+        <h3>{{blog.content}}</h3>
+
+        <br>
+        <hr size="3">
     {% endfor %}
 
 {% endblock %}
