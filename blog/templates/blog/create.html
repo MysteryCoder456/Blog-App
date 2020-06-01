@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    New Blog
+{% endblock %}
+
+{% block main %}
+
+    <h1>Create A New Blog</h1>
+    <h4><u>Not Functional Right Now</u></h4>
+
+    <form method="POST">
+
+        {% csrf_token %}
+        {{form|crispy}}
+        <p>* Required</p>
+        <button type="submit" name="submit_button">Create!</button>
+
+    </form>
+
+{% endblock %}
