@@ -13,7 +13,7 @@ html {
 
 .sidenav {
     height: 100%;
-    width: 220px;
+    width: 15.3%;
     position: fixed;
     top: 0;
     left: 0;
@@ -38,9 +38,11 @@ html {
 }
 
 .main {
-    margin-left: 220px;
+    margin-left: 15.4%;
     padding: 4px 0px 0px 30px;
 }
+
+/* Tag Styles */
 
 hr {
     position: relative;
@@ -48,4 +50,9 @@ hr {
     background-color: #BBBBBB;
     border: none;
     width: 102%;
+}
+
+h4 {
+    color: #4B4B4B;
+    padding: -10px 0px -10px 0px;
 }
