@@ -14,7 +14,7 @@ class Blog(models.Model):
     blog_list = models.ForeignKey(BlogList, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=50)
-    creation_date = models.DateTimeField(default=timezone.now())
+    creation_date = models.DateField()
     content = models.TextField(
         max_length=500,
         blank=True,
