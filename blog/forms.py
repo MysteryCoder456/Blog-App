@@ -2,7 +2,11 @@ from django import forms
 from django.utils import timezone
 from .models import Blog, BlogList
 
-list_choices = [ (ls.name, ls) for ls in BlogList.objects.all() ]
+list_choices = []
+for ls in BlogList.objects.all():
+    if ls.name != "Dev Logs":
+        list_choices.append((ls.name, ls))
+
 
 class NewBlogForm(forms.Form):
     blog_list = forms.CharField(label="Category", widget=forms.Select(choices=list_choices))
