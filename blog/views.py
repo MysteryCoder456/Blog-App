@@ -28,9 +28,6 @@ def create_blog(request):
     current_minutes_total = current_hours * 60 + current_minutes
     time_diff = current_minutes_total - visit_minutes_total
 
-    # TODO: Remove the below line before commiting
-    print(current_minutes_total, visit_minutes_total)
-
     if request.method == "POST":
         form = NewBlogForm(request.POST)
 
@@ -72,3 +69,8 @@ def create_blog(request):
         "time_left": 5 - time_diff
     }
     return render(request, "blog/create.html", context)
+
+
+def dev_logs(request):
+    dev_set = reversed(BlogList.objects.get(name="Dev Logs").blog_set.all())
+    return render(request, "blog/dev.html", {"dev_set": dev_set})
