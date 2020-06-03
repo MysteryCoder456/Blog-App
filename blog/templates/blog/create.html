@@ -14,7 +14,20 @@
         {% csrf_token %}
         {{form|crispy}}
         <p>* Required</p>
-        <button type="submit" name="submit_button">Create!</button>
+
+        {% if time_diff < 5 %}
+
+            <h3>
+                You cannot make a blog post right now,<br>
+                you can make another one in {{time_left}} minutes.
+            </h3>
+            <h4>This is to prevent spam.</h4>
+
+        {% else %}
+
+            <button type="submit" name="submit_button">Create!</button>
+
+        {% endif %}
 
     </form>
 
