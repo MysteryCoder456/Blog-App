@@ -9,6 +9,12 @@ visit_minutes = int(timezone.now().time().strftime("%M"))
 visit_minutes_total = visit_hours * 60 + visit_minutes
 print(visit_minutes_total)
 
+def reset_visit_time(current_time):
+    global visit_hours, visit_minutes, visit_minutes_total
+    visit_hours = current_time[0]
+    visit_minutes = current_time[1]
+    visit_minutes_total = visit_hours * 60 + visit_minutes
+
 
 def home(request):
     return render(request, "blog/home.html")
@@ -28,6 +34,11 @@ def create_blog(request):
     current_minutes_total = current_hours * 60 + current_minutes
     time_diff = current_minutes_total - visit_minutes_total
 
+    # If the current time reaches the next day, reset visit_time
+    if current_minutes_total < visit_minutes_total:
+        reset_visit_time()
+
+    # Handle form input
     if request.method == "POST":
         form = NewBlogForm(request.POST)
 
@@ -54,9 +65,7 @@ def create_blog(request):
             b.save()
 
             # Reset Visit Minutes to current time
-            visit_hours = current_hours
-            visit_minutes = current_minutes
-            visit_minutes_total = visit_hours * 60 + visit_minutes
+            reset_visit_time()
 
             return redirect("/blogs")
 
