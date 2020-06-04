@@ -36,7 +36,7 @@ def create_blog(request):
 
     # If the current time reaches the next day, reset visit_time
     if current_minutes_total < visit_minutes_total:
-        reset_visit_time()
+        reset_visit_time((current_hours, current_minutes))
 
     # Handle form input
     if request.method == "POST":
@@ -65,7 +65,7 @@ def create_blog(request):
             b.save()
 
             # Reset Visit Minutes to current time
-            reset_visit_time()
+            reset_visit_time((current_hours, current_minutes))
 
             return redirect("/blogs")
 
