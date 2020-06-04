@@ -9,22 +9,33 @@ visit_minutes = int(timezone.now().time().strftime("%M"))
 visit_minutes_total = visit_hours * 60 + visit_minutes
 print(visit_minutes_total)
 
+
 def reset_visit_time(current_time):
     global visit_hours, visit_minutes, visit_minutes_total
     visit_hours = current_time[0]
     visit_minutes = current_time[1]
     visit_minutes_total = visit_hours * 60 + visit_minutes
 
+# Views
 
+# LABEL: HOME PAGE
 def home(request):
     return render(request, "blog/home.html")
 
 
+# LABEL: VIEWS BLOGS
 def blogs(request):
-    blog_set = reversed(BlogList.objects.get(name="Technology").blog_set.all())
-    return render(request, "blog/blogs.html", {"blog_set": blog_set})
+    all_blogs = []
+
+    for blog_list in BlogList.objects.all():
+        if blog_list.name != "Dev Logs":
+            all_blogs.extend(blog_list.blog_set.all())
+
+    all_blogs.sort(key=lambda blog: blog.creation_date)
+    return render(request, "blog/blogs.html", {"blog_set": all_blogs})
 
 
+# LABEL: CREATE BLOG
 def create_blog(request):
     global visit_hours, visit_minutes, visit_minutes_total
 
