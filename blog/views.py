@@ -31,7 +31,7 @@ def blogs(request):
         if blog_list.name != "Dev Logs":
             all_blogs.extend(blog_list.blog_set.all())
 
-    all_blogs.sort(key=lambda blog: blog.creation_date)
+    all_blogs.sort(key=lambda blog: blog.creation_date, reverse=True)
     return render(request, "blog/blogs.html", {"blog_set": all_blogs})
 
 
