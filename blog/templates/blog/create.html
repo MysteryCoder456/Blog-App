@@ -5,27 +5,34 @@
     New Blog
 {% endblock %}
 
+{% block heading %}
+    Create a New Blog
+{% endblock %}
+
 {% block main %}
 
-    <h1>Create A New Blog</h1>
-
-    <form method="POST">
+    <form method="POST" class="mb-5 font-weight-bold">
 
         {% csrf_token %}
         {{form|crispy}}
-        <p>* Required</p>
 
         {% if time_diff < 5 %}
 
-            <h3>
-                You cannot make a blog post right now,<br>
-                you can make another one in {{time_left}} minutes.
-            </h3>
-            <h4>This is to prevent spam.</h4>
+            <h4 class="alert alert-warning">
+                You cannot make a blog post right now,
+                you can make another one in {{time_left}} minute(s).<br>
+                This is to prevent spam.
+            </h4>
 
         {% else %}
 
-            <button type="submit" name="submit_button">Create!</button>
+            <p class="alert alert-info font-weight-normal">
+                * Required.<br>
+                Once you make a post, you <b>CANNOT</b> change or edit it. Make sure to look for and fix any mistakes!
+            </p>
+            <button type="submit" name="submit_button" class="btn btn-primary font-weight-bold">
+                <h4 style="margin: auto;">Create!</h4>
+            </button>
 
         {% endif %}
 

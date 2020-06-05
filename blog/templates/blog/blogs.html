@@ -4,21 +4,25 @@
     New Blogs
 {% endblock %}
 
+{% block heading %}
+    New Blogs
+{% endblock %}
+
 {% block main %}
 
-    <h1>New Blogs</h1>
-
     {% for blog in blog_set %}
-        <hr size="3">
+        <hr style="height: 1px;">
         <br>
 
         <h1>{{blog.title}}</h1>
-        <h4>By {{blog.author}} on {{blog.creation_date}}</h4>
-        <h4>Category: {{blog.blog_list.name}}
-        <h3>{{blog.content|linebreaks}}</h3>
+        <div class="pb-3" style="line-height: 0.1rem;">
+            <h5 class="text-muted">By {{blog.author}} on {{blog.creation_date}}</h5>
+            <h5 class="text-muted">Category: {{blog.blog_list.name}}</h5>
+        </div>
+        <h4 class="font-weight-normal">{{blog.content|linebreaks}}</h4>
 
         <br>
     {% endfor %}
-    <hr size=3>
+    <hr style="height: 1px;">
 
 {% endblock %}

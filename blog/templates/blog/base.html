@@ -5,25 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Base Template{% endblock %} - MC456 Blog Site</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'blog/styles.css' %}">
 </head>
 <body>
 
     <div class="sidenav">
-        <a href="/">Home</a>
-        <a href="/blogs">New Blogs</a>
-        <a href="/createblog">Write New Blog</a>
-        <a href="/dev">Dev Logs</a>
-        <a href="#">Coming Soon</a>
+        <a href="/" class="font-weight-light">Home</a>
+        <a href="/blogs" class="font-weight-light">New Blogs</a>
+        <a href="/createblog" class="font-weight-light">Write New Blog</a>
+        <a href="/dev" class="font-weight-light">Dev Logs</a>
+        <a href="#" class="font-weight-light">Coming Soon</a>
     </div>
 
-    <div class="main">
-        <h1>MysteryCoder456 Blog Website</h1>
-        <hr size="5">
-        <br>
+    <div class="main mt-4">
+        <h1 class="display-4 font-weight-bold">MysteryCoder456 Blog Website</h1>
+        <hr style="height: 4px;" class="mb-4">
+
+        <h1 class="display-4">{% block heading %}{% endblock %}</h1>
+
         {% block main %}
         {% endblock %}
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 </html>
