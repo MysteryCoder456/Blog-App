@@ -20,6 +20,7 @@ html {
     overflow-x: hidden;
     text-align: center;
     background-color: #DC1414;
+    z-index: 99;
 }
 
 .sidenav a {

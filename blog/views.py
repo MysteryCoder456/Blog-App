@@ -90,6 +90,7 @@ def create_blog(request):
     return render(request, "blog/create.html", context)
 
 
+# LABEL: DEV LOGS
 def dev_logs(request):
     dev_set = reversed(BlogList.objects.get(name="Dev Logs").blog_set.all())
     return render(request, "blog/dev.html", {"dev_set": dev_set})
