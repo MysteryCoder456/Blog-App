@@ -7,7 +7,6 @@ from .forms import NewBlogForm
 visit_hours = int(timezone.now().time().strftime("%H"))
 visit_minutes = int(timezone.now().time().strftime("%M"))
 visit_minutes_total = visit_hours * 60 + visit_minutes
-print(visit_minutes_total)
 
 
 def reset_visit_time(current_time):
