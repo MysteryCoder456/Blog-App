@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block heading %}
+    Register Page
+{% endblock %}
+
+{% block main %}
+    <form method="POST" action="#">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" name="submit_button" class="btn btn-primary font-weight-bold">
+            <h4 style="margin: auto;">Register!</h4>
+        </button>
+    </form>
+{% endblock %}
