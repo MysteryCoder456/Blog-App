@@ -23,6 +23,12 @@
         <h1 class="display-4 font-weight-bold">MysteryCoder456 Blog Website</h1>
         <hr style="height: 4px;" class="mb-4">
 
+        {% if messages %}
+            {% for message in messages %}
+                <p class="alert alert-{{message.tags}}">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+
         <h1 class="display-4">{% block heading %}{% endblock %}</h1>
 
         {% block main %}
