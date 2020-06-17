@@ -11,13 +11,13 @@
 <body>
 
     <div class="sidenav">
-        <a href="/" class="font-weight-light">Home</a>
-        <a href="/blogs" class="font-weight-light">New Blogs</a>
-        <a href="/createblog" class="font-weight-light">Write New Blog</a>
-        <a href="/dev" class="font-weight-light">Dev Logs</a>
+        <a href="{% url 'home' %}" class="font-weight-light">Home</a>
+        <a href="{% url 'new_blogs' %}" class="font-weight-light">New Blogs</a>
+        <a href="{% url 'create_blog' %}" class="font-weight-light">Write New Blog</a>
+        <a href="{% url 'dev_logs' %}" class="font-weight-light">Dev Logs</a>
         <a href="https://github.com/MysteryCoder456/Blog-App" target="_blank" class="font-weight-light">GitHub Repo</a>
         <div class="auth-buttons pb-4">
-            <a href="/auth/register" class="font-weight-light">Register</a>
+            <a href="{% url 'register' %}" class="font-weight-light">Register</a>
         </div>
     </div>
 
