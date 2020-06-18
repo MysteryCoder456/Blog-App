@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .models import BlogList
 from .forms import NewBlogForm
@@ -36,6 +37,7 @@ def blogs(request):
 
 
 # LABEL: CREATE BLOG
+@login_required
 def create_blog(request):
     global visit_hours, visit_minutes, visit_minutes_total
 
