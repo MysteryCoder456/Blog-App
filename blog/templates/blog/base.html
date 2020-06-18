@@ -19,6 +19,7 @@
 
         <div class="auth-buttons pb-4">
             {% if user.is_authenticated %}
+                <p class="font-weight-light">Signed In as {{user.username}}</p>
                 <a href="{% url 'logout' %}" class="font-weight-light">Logout</a>
             {% else %}
                 <a href="{% url 'login' %}" class="font-weight-light">Login</a>
