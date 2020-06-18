@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    Logout
+{% endblock %}
+
+{% block heading %}
+    You have been Logged out!
+{% endblock %}
+
+{% block main %}
+    <h3>To login again, go <a href="{% url 'login' %}">here</a>.</h3>
+{% endblock %}
