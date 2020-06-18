@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.utils import timezone
 from .models import BlogList
 from .forms import NewBlogForm
@@ -74,10 +75,11 @@ def create_blog(request):
             )
             b.save()
 
-            # Reset Visit Minutes to current time
+            # Reset Visit Minutes to current time and alert
             reset_visit_time((current_hours, current_minutes))
+            messages.success(request, f"Blog {title} successfully created by {author}!")
 
-            return redirect("/blogs")
+            return redirect("new_blogs")
 
     else:
         form = NewBlogForm()
