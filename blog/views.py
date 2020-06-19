@@ -64,8 +64,8 @@ def create_blog(request):
 
             # Get the information from the form
             title = form.cleaned_data["title"]
-            author = form.cleaned_data["author"]
-            creation_date = form.cleaned_data["creation_date"]
+            author = request.user.username
+            creation_date = timezone.localdate()
             content = form.cleaned_data["content"]
 
             # Create the Blog and save it
