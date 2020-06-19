@@ -1,3 +1,8 @@
+:root {
+    --sidebar-width: 14%;
+    --sidebar-font-size: 23px;
+}
+
 /* Animations */
 
 @keyframes sidenav-hover {
@@ -13,22 +18,23 @@ html {
 
 .sidenav {
     height: 100%;
-    width: 15.3%;
+    width: var(--sidebar-width);
     position: fixed;
     top: 0;
     left: 0;
     overflow-x: hidden;
     text-align: center;
     background-color: #DC1414;
+    z-index: 99;
 }
 
 .sidenav a {
     text-decoration: none;
     color: #ffffff;
     display: block;
-    font-size: 27px;
-    padding-top: 10%;
-    padding-bottom: 10%;
+    font-size: var(--sidebar-font-size);
+    padding-top: 8%;
+    padding-bottom: 8%;
 }
 
 .sidenav a:hover {
@@ -37,8 +43,22 @@ html {
     background-color: maroon
 }
 
+.sidenav p {
+    color: #ffffff;
+    display: block;
+    font-size: var(--sidebar-font-size);
+    padding-top: 8%;
+    padding-bottom: 8%;
+}
+
+.auth-buttons {
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+}
+
 .main {
-    margin-left: 15.4%;
+    margin-left: var(--sidebar-width);
     padding: 4px 0px 0px 30px;
 }
 

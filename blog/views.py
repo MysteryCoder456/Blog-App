@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .models import BlogList
 from .forms import NewBlogForm
@@ -7,7 +9,6 @@ from .forms import NewBlogForm
 visit_hours = int(timezone.now().time().strftime("%H"))
 visit_minutes = int(timezone.now().time().strftime("%M"))
 visit_minutes_total = visit_hours * 60 + visit_minutes
-print(visit_minutes_total)
 
 
 def reset_visit_time(current_time):
@@ -36,6 +37,7 @@ def blogs(request):
 
 
 # LABEL: CREATE BLOG
+@login_required
 def create_blog(request):
     global visit_hours, visit_minutes, visit_minutes_total
 
@@ -62,8 +64,8 @@ def create_blog(request):
 
             # Get the information from the form
             title = form.cleaned_data["title"]
-            author = form.cleaned_data["author"]
-            creation_date = form.cleaned_data["creation_date"]
+            author = request.user.username
+            creation_date = timezone.localdate()
             content = form.cleaned_data["content"]
 
             # Create the Blog and save it
@@ -75,10 +77,11 @@ def create_blog(request):
             )
             b.save()
 
-            # Reset Visit Minutes to current time
+            # Reset Visit Minutes to current time and alert
             reset_visit_time((current_hours, current_minutes))
+            messages.success(request, f"Blog {title} successfully created by {author}!")
 
-            return redirect("/blogs")
+            return redirect("new_blogs")
 
     else:
         form = NewBlogForm()
@@ -91,6 +94,7 @@ def create_blog(request):
     return render(request, "blog/create.html", context)
 
 
+# LABEL: DEV LOGS
 def dev_logs(request):
     dev_set = reversed(BlogList.objects.get(name="Dev Logs").blog_set.all())
     return render(request, "blog/dev.html", {"dev_set": dev_set})

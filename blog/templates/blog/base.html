@@ -11,21 +11,39 @@
 <body>
 
     <div class="sidenav">
-        <a href="/" class="font-weight-light">Home</a>
-        <a href="/blogs" class="font-weight-light">New Blogs</a>
-        <a href="/createblog" class="font-weight-light">Write New Blog</a>
-        <a href="/dev" class="font-weight-light">Dev Logs</a>
+        <a href="{% url 'home' %}" class="font-weight-light">Home</a>
+        <a href="{% url 'new_blogs' %}" class="font-weight-light">New Blogs</a>
+        <a href="{% url 'create_blog' %}" class="font-weight-light">Write New Blog</a>
+        <a href="{% url 'dev_logs' %}" class="font-weight-light">Dev Logs</a>
         <a href="https://github.com/MysteryCoder456/Blog-App" target="_blank" class="font-weight-light">GitHub Repo</a>
+
+        <div class="auth-buttons pb-4">
+            {% if user.is_authenticated %}
+                <p class="font-weight-light">Signed In as {{user.username}}</p>
+                <a href="{% url 'logout' %}" class="font-weight-light">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="font-weight-light">Login</a>
+                <a href="{% url 'register' %}" class="font-weight-light">Register</a>
+            {% endif %}
+        </div>
     </div>
 
     <div class="main mt-4">
+        {% comment %} Title {% endcomment %}
         <h1 class="display-4 font-weight-bold">MysteryCoder456 Blog Website</h1>
         <hr style="height: 4px;" class="mb-4">
 
-        <h4 class="alert alert-warning"><b>WARNING:</b> All non-informative blog posts will be removed from this site to accommodate a new feature.</h4>
+        {% comment %} Alert messages {% endcomment %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="alert alert-{{message.tags}}">{{message}}</p>
+            {% endfor %}
+        {% endif %}
 
+        {% comment %} Heading {% endcomment %}
         <h1 class="display-4">{% block heading %}{% endblock %}</h1>
 
+        {% comment %} Main Body {% endcomment %}
         {% block main %}
         {% endblock %}
     </div>
