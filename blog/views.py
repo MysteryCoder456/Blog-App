@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+
 from .models import BlogList
-from .forms import NewBlogForm
+from .forms import BlogSortForm, NewBlogForm
 
 # Get the time of when the user opens homepage of website
 visit_hours = int(timezone.now().time().strftime("%H"))
@@ -98,3 +99,26 @@ def create_blog(request):
 def dev_logs(request):
     dev_set = reversed(BlogList.objects.get(name="Dev Logs").blog_set.all())
     return render(request, "blog/dev.html", {"dev_set": dev_set})
+
+
+# LABEL: CATEGORIES
+def categories(request):
+    if request.method == "POST":
+        form = BlogSortForm(request.POST)
+
+        if form.is_valid():
+            list_name = request.POST.get("category")
+            blog_list = BlogList.objects.get(name=list_name)
+            blog_set = blog_list.blog_set.all()
+            if len(blog_set) < 1:
+                messages.warning(request, "There are no blogs in this categories yet!")
+
+    else:
+        blog_set = []
+        form = BlogSortForm()
+
+    context = {
+        "form": form,
+        "blog_set": blog_set
+    }
+    return render(request, "blog/categories.html", context)

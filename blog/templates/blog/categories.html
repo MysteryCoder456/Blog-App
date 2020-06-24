@@ -1,0 +1,41 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Categories
+{% endblock %}
+
+{% block heading %}
+    Categories
+{% endblock %}
+
+{% block main %}
+    <hr style="height: 1px;">
+
+    <form method="POST" action="#" class="font-weight-bold">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button class="btn btn-primary" type="submit">Get Blogs!</button>
+    </form>
+
+    {% if blog_set %}
+
+        {% for blog in blog_set %}
+            <hr style="height: 1px;">
+            <br>
+
+            <h1>{{blog.title}}</h1>
+            <div class="pb-3" style="line-height: 0.1rem;">
+                <h5 class="text-muted">By {{blog.author}} on {{blog.creation_date}}</h5>
+                <h5 class="text-muted">Category: {{blog.blog_list.name}}</h5>
+            </div>
+            <h4 class="font-weight-normal">{{blog.content|linebreaks}}</h4>
+
+            <br>
+        {% endfor %}
+
+    {% endif %}
+
+    <hr style="height: 1px;">
+
+{% endblock %}

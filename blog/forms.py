@@ -8,6 +8,10 @@ for ls in BlogList.objects.all():
         list_choices.append((ls.name, ls))
 
 
+class BlogSortForm(forms.Form):
+    category = forms.CharField(label="Category", widget=forms.Select(choices=list_choices), required=False)
+
+
 class NewBlogForm(forms.Form):
     blog_list = forms.CharField(label="Category", widget=forms.Select(choices=list_choices))
     title = forms.CharField(max_length=100, label="Title")
