@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
-from .models import BlogList
+from .models import BlogList, Blog
 from .forms import BlogSortForm, NewBlogForm
 
 # Get the time of when the user opens homepage of website
@@ -21,6 +21,8 @@ def reset_visit_time(current_time):
 # Views
 
 # LABEL: HOME PAGE
+
+
 def home(request):
     return render(request, "blog/home.html")
 
@@ -35,6 +37,12 @@ def blogs(request):
 
     all_blogs.sort(key=lambda blog: blog.creation_date, reverse=True)
     return render(request, "blog/blogs.html", {"blog_set": all_blogs})
+
+
+# LABEL: BLOG DETAIL
+def blog_detail(request, blog_title):
+    blog = Blog.objects.get(title=blog_title)
+    return render(request, "blog/blog_detail.html", {"blog": blog})
 
 
 # LABEL: CREATE BLOG
@@ -80,7 +88,8 @@ def create_blog(request):
 
             # Reset Visit Minutes to current time and alert
             reset_visit_time((current_hours, current_minutes))
-            messages.success(request, f"Blog {title} successfully created by {author}!")
+            messages.success(
+                request, f"Blog {title} successfully created by {author}!")
 
             return redirect("new_blogs")
 
@@ -111,7 +120,8 @@ def categories(request):
             blog_list = BlogList.objects.get(name=list_name)
             blog_set = blog_list.blog_set.all()
             if len(blog_set) < 1:
-                messages.warning(request, "There are no blogs in this categories yet!")
+                messages.warning(
+                    request, "There are no blogs in this categories yet!")
 
     else:
         blog_set = []
