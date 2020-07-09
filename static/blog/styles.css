@@ -1,6 +1,6 @@
 :root {
     --sidebar-width: 14%;
-    --sidebar-font-size: 23px;
+    --sidebar-font-size: 1.7vw;
 }
 
 /* Animations */
@@ -12,7 +12,7 @@
 
 /* Styles */
 
-html {
+* {
     font-family: Montserrat, Helvetica, Arial;
 }
 
@@ -57,9 +57,26 @@ html {
     position: absolute;
 }
 
+.site-title {
+    font-size: 3.5vw;
+}
+
+.heading {
+    font-size: 2.945vw
+}
+
 .main {
     margin-left: var(--sidebar-width);
     padding: 4px 0px 0px 30px;
+}
+
+.blog-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.blog-title a:hover {
+    text-decoration: underline;
 }
 
 /* Tag Styles */
@@ -70,4 +87,8 @@ hr {
     background-color: #BBBBBB;
     border: none;
     width: 100%;
+}
+
+h4 {
+    font-size: 1.77vw;
 }
