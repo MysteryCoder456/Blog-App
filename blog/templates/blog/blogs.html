@@ -19,7 +19,7 @@
             <h5 class="text-muted">By {{blog.author}} on {{blog.creation_date}}</h5>
             <h5 class="text-muted">Category: {{blog.blog_list.name}}</h5>
         </div>
-        <h4>{{blog.content|linebreaks}}</h4>
+        <h4 class="font-weight-normal">{{blog.content|linebreaks}}</h4>
 
         <br>
     {% endfor %}
