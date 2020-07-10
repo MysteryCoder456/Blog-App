@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MaxLengthValidator
 from django.utils import timezone
+from vote.models import VoteModel
 
 
 class BlogList(models.Model):
@@ -10,7 +11,7 @@ class BlogList(models.Model):
         return self.name
 
 
-class Blog(models.Model):
+class Blog(VoteModel, models.Model):
     blog_list = models.ForeignKey(BlogList, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=50)
@@ -20,7 +21,6 @@ class Blog(models.Model):
         blank=True,
         validators=[MaxLengthValidator(500)]
     )
-    points = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.title + " " + str(self.id)
+        return f"Title: {self.title}, id: {self.id}, Points: {self.vote_score}"
