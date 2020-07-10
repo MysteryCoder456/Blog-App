@@ -13,7 +13,7 @@
     <div style="line-height: 0.1rem;">
         <h5 class="text-muted">By {{blog.author}} on {{blog.creation_date}}</h5>
         <h5 class="text-muted">Category: {{blog.blog_list.name}}</h5>
-        <h5 class="text-muted">Points: {{blog.points}}</h5>
+        <h5 class="text-muted">Points: {{points}}</h5>
     </div>
 
     <hr style="height: 1px;">
@@ -22,12 +22,30 @@
 
     <form method="POST" action="#">
         {% csrf_token %}
-        <button type="submit" name="vote" value="upvote" class="btn btn-outline-success font-weight-bold">
-            Upvote!
-        </button>
-        <button type="submit" name="vote" value="downvote" class="btn btn-outline-danger font-weight-bold">
-            Downvote!
-        </button>
+
+        {% comment %} Vote Buttons {% endcomment %}
+        {% if action == 1 %}
+            <button type="submit" name="vote" value="upvote" class="btn btn-success font-weight-bold">
+                Upvote!
+            </button>
+            <button type="submit" name="vote" value="downvote" class="btn btn-outline-danger font-weight-bold">
+                Downvote!
+            </button>
+        {% elif action == -1 %}
+            <button type="submit" name="vote" value="upvote" class="btn btn-outline-success font-weight-bold">
+                Upvote!
+            </button>
+            <button type="submit" name="vote" value="downvote" class="btn btn-danger font-weight-bold">
+                Downvote!
+            </button>
+        {% elif action == 0 %}
+            <button type="submit" name="vote" value="upvote" class="btn btn-outline-success font-weight-bold">
+                Upvote!
+            </button>
+            <button type="submit" name="vote" value="downvote" class="btn btn-outline-danger font-weight-bold">
+                Downvote!
+            </button>
+        {% endif %}
     </form>
 
 {% endblock %}

@@ -40,18 +40,36 @@ def blogs(request):
 
 
 # LABEL: BLOG DETAIL
+@login_required
 def blog_detail(request, blog_title):
     blog = Blog.objects.get(title=blog_title)
+    user_id = request.user.id
+    user_check = {"user_id": user_id}
+    user_votes_up = blog.votes.user_ids(0)
+    user_votes_down = blog.votes.user_ids(1)
+    action = 0
 
     if request.method == "POST":
         vote = request.POST.get("vote")
+
         if vote == "upvote":
-            blog.points += 1
+            blog.votes.up(user_id)
         elif vote == "downvote":
-            blog.points -= 1
+            blog.votes.down(user_id)
+
         blog.save()
 
-    return render(request, "blog/blog_detail.html", {"blog": blog})
+    if user_check in user_votes_up.values('user_id'):
+        action = 1
+    elif user_check in user_votes_down.values('user_id'):
+        action = -1
+
+    context = {
+        "blog": blog,
+        "action": action,
+        "points": len(user_votes_up) - len(user_votes_down)
+    }
+    return render(request, "blog/blog_detail.html", context)
 
 
 # LABEL: CREATE BLOG
