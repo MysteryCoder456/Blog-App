@@ -10,6 +10,8 @@
 {% endblock %}
 
 {% block main %}
+    <h5 class="alert alert-info">Some features require you to login in.<h5>
+
     <form method="POST">
         {% csrf_token %}
         {{form|crispy}}
@@ -17,4 +19,7 @@
             <h4 style="margin: auto;">Login!</h4>
         </button>
     </form>
+
+    <br>
+    <h6>Don't have an account yet? Register <a href="{% url 'register' %}">here</a>!</h6>
 {% endblock %}
