@@ -42,6 +42,15 @@ def blogs(request):
 # LABEL: BLOG DETAIL
 def blog_detail(request, blog_title):
     blog = Blog.objects.get(title=blog_title)
+
+    if request.method == "POST":
+        vote = request.POST.get("vote")
+        if vote == "upvote":
+            blog.points += 1
+        elif vote == "downvote":
+            blog.points -= 1
+        blog.save()
+
     return render(request, "blog/blog_detail.html", {"blog": blog})
 
 

@@ -20,6 +20,7 @@ class Blog(models.Model):
         blank=True,
         validators=[MaxLengthValidator(500)]
     )
+    points = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title + " " + str(self.id)
