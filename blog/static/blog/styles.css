@@ -59,7 +59,7 @@ html {
 
 .main {
     margin-left: var(--sidebar-width);
-    padding: 4px 0px 0px 30px;
+    padding-left: 30px;
 }
 
 .blog-title a {
