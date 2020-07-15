@@ -14,7 +14,7 @@ class BlogList(models.Model):
 class Blog(VoteModel, models.Model):
     blog_list = models.ForeignKey(BlogList, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    author = models.CharField(max_length=50)
+    author = models.CharField(max_length=150)
     creation_date = models.DateField()
     content = models.TextField(
         max_length=500,
@@ -24,3 +24,17 @@ class Blog(VoteModel, models.Model):
 
     def __str__(self):
         return f"Title: {self.title}, id: {self.id}, Points: {self.vote_score}"
+
+
+class Comment(VoteModel, models.Model):
+    author = models.CharField(max_length=150)
+    blog_post = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    creation_date = models.DateField()
+    content = models.TextField(
+        max_length=200,
+        blank=True,
+        validators=[MaxLengthValidator(200)]
+    )
+
+    def __str__(self):
+        return f"Post: {self.blog_post}, id: {self.id}, Points: {self.vote_score}"
