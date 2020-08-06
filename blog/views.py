@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
-from .models import BlogList, Blog
+from .models import *
 from .forms import BlogSortForm, NewBlogForm
 
 # Get the time of when the user opens homepage of website
@@ -18,11 +18,10 @@ def reset_visit_time(current_time):
     visit_minutes = current_time[1]
     visit_minutes_total = visit_hours * 60 + visit_minutes
 
+
 # Views
 
 # LABEL: HOME PAGE
-
-
 def home(request):
     return render(request, "blog/home.html")
 
@@ -49,6 +48,10 @@ def blog_detail(request, blog_title):
     user_votes_down = blog.votes.user_ids(1)
     action = 0
 
+    # Get blog's comments
+    comment_set = list(blog.comment_set.all())
+    comment_set.sort(key=lambda comment: comment.creation_date, reverse=True)
+
     if request.method == "POST":
         vote = request.POST.get("vote")
 
@@ -67,7 +70,9 @@ def blog_detail(request, blog_title):
     context = {
         "blog": blog,
         "action": action,
-        "points": len(user_votes_up) - len(user_votes_down)
+        "points": blog.votes.count(),
+        "comment_set": comment_set,
+        "comment_count": len(comment_set)
     }
     return render(request, "blog/blog_detail.html", context)
 

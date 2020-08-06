@@ -23,12 +23,12 @@ class Blog(VoteModel, models.Model):
     )
 
     def __str__(self):
-        return f"Title: {self.title}, id: {self.id}, Points: {self.vote_score}"
+        return f"Title: {self.title}, id: {self.id}, Points: {self.votes.count()}"
 
 
-class Comment(VoteModel, models.Model):
-    author = models.CharField(max_length=150)
+class Comment(models.Model):
     blog_post = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    author = models.CharField(max_length=150)
     creation_date = models.DateField()
     content = models.TextField(
         max_length=200,
@@ -37,4 +37,4 @@ class Comment(VoteModel, models.Model):
     )
 
     def __str__(self):
-        return f"Post: {self.blog_post}, id: {self.id}, Points: {self.vote_score}"
+        return f"Parent Post: {self.blog_post.title}, Content: {self.content}, id: {self.id}"

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import BlogList, Blog
+from .models import *
 
 admin.site.register(BlogList)
 admin.site.register(Blog)
+admin.site.register(Comment)

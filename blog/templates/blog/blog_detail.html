@@ -10,7 +10,7 @@
 
 {% block main %}
 
-    <div style="line-height: 0.1rem;">
+    <div>
         <h5 class="text-muted">By {{blog.author}} on {{blog.creation_date}}</h5>
         <h5 class="text-muted">Category: {{blog.blog_list.name}}</h5>
         <h5 class="text-muted">Points: {{points}}</h5>
@@ -47,5 +47,22 @@
             </button>
         {% endif %}
     </form>
+
+    <br>
+
+    {% comment %} Comments {% endcomment %}
+
+    {% if comment_count > 0 %}
+        <h1 class="font-weight-light">Comments</h1>
+        <hr style="height: 2px;">
+
+        {% for comment in comment_set %}
+            <div class="pt-2 pb-2">
+                <h4 class="font-weight-normal">{{comment.content|linebreaks}}</h4>
+                <h6 class="text-muted">By {{comment.author}} on {{comment.creation_date}}</h5>
+            </div>
+            <hr style="height: 1px;">
+        {% endfor %}
+    {% endif %}
 
 {% endblock %}
