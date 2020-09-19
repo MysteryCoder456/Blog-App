@@ -16,3 +16,7 @@ class NewBlogForm(forms.Form):
     blog_list = forms.CharField(label="Category", widget=forms.Select(choices=list_choices))
     title = forms.CharField(max_length=100, label="Title")
     content = forms.CharField(label="Blog Content", max_length=500, widget=forms.Textarea)
+
+
+class NewCommentForm(forms.Form):
+    content = forms.CharField(max_length=200)

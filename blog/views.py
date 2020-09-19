@@ -4,8 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
 from .models import *
-from .forms import BlogSortForm, NewBlogForm
-
+from .forms import BlogSortForm, NewBlogForm, NewCommentForm
 # Get the time of when the user opens homepage of website
 visit_hours = int(timezone.now().time().strftime("%H"))
 visit_minutes = int(timezone.now().time().strftime("%M"))
@@ -54,13 +53,27 @@ def blog_detail(request, blog_title):
 
     if request.method == "POST":
         vote = request.POST.get("vote")
+        comment_form = NewCommentForm(request.POST)
 
         if vote == "upvote":
             blog.votes.up(user_id)
         elif vote == "downvote":
             blog.votes.down(user_id)
 
+        if comment_form.is_valid():
+            comment_author = request.user.username
+            comment_content = comment_form.cleaned_data["content"]
+            comment_creation_date = timezone.localdate()
+
+            blog.comment_set.create(
+                author=comment_author,
+                creation_date=comment_creation_date,
+                content=comment_content
+            )
+
         blog.save()
+    else:
+        comment_form = NewCommentForm()
 
     if user_check in user_votes_up.values('user_id'):
         action = 1
@@ -72,7 +85,8 @@ def blog_detail(request, blog_title):
         "action": action,
         "points": blog.votes.count(),
         "comment_set": comment_set,
-        "comment_count": len(comment_set)
+        "comment_count": len(comment_set),
+        "comment_form": comment_form
     }
     return render(request, "blog/blog_detail.html", context)
 

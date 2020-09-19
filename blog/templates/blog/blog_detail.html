@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     {{blog.title}}
@@ -46,6 +47,16 @@
                 Downvote!
             </button>
         {% endif %}
+    </form>
+
+    <br>
+
+    <form method="POST" class="fotn-weight-bold" action="#">
+        {% csrf_token %}
+        {{comment_form|crispy}}
+        <button type="submit" name="submit_button" class="btn btn-primary font-weight-bold">
+            <h6 style="margin: auto;">Comment!</h6>
+        </button>
     </form>
 
     <br>
