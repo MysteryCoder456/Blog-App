@@ -1,3 +1,4 @@
+import math
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -22,7 +23,16 @@ def reset_visit_time(current_time):
 
 # LABEL: HOME PAGE
 def home(request):
-    return render(request, "blog/home.html")
+    bday_days = 25 + 9 * 30 + 2006 * 365
+
+    print(timezone.now().date().isoformat())
+    current_years = int(timezone.now().date().isoformat()[0:4])
+    current_months = int(timezone.now().date().isoformat()[6:7])
+    current_days = int(timezone.now().date().isoformat()[8:10])
+    current_total_days = current_days + current_months * 30 + current_years * 365
+
+    age = math.floor((current_total_days - bday_days) / 365)
+    return render(request, "blog/home.html", {"age": age})
 
 
 # LABEL: VIEWS BLOGS
