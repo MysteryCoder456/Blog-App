@@ -49,8 +49,8 @@ def blogs(request):
 
 # LABEL: BLOG DETAIL
 @login_required
-def blog_detail(request, blog_title):
-    blog = Blog.objects.get(title=blog_title)
+def blog_detail(request, blog_id):
+    blog = Blog.objects.get(id=blog_id)
     user_id = request.user.id
     user_check = {"user_id": user_id}
     user_votes_up = blog.votes.user_ids(0)
