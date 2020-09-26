@@ -57,10 +57,6 @@ def blog_detail(request, blog_id):
     user_votes_down = blog.votes.user_ids(1)
     action = 0
 
-    # Get blog's comments
-    comment_set = list(blog.comment_set.all())
-    comment_set.sort(key=lambda comment: comment.creation_date, reverse=True)
-
     if request.method == "POST":
         vote = request.POST.get("vote")
         comment_form = NewCommentForm(request.POST)
@@ -85,6 +81,10 @@ def blog_detail(request, blog_id):
         blog.save()
     else:
         comment_form = NewCommentForm()
+
+    # Get blog's comments
+    comment_set = list(blog.comment_set.all())
+    comment_set.sort(key=lambda comment: comment.creation_date, reverse=True)
 
     if user_check in user_votes_up.values('user_id'):
         action = 1
