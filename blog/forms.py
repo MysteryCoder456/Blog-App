@@ -19,4 +19,4 @@ class NewBlogForm(forms.Form):
 
 
 class NewCommentForm(forms.Form):
-    content = forms.CharField(max_length=200)
+    content = forms.CharField(max_length=200, required=False)

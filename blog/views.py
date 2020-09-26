@@ -75,11 +75,12 @@ def blog_detail(request, blog_id):
             comment_content = comment_form.cleaned_data["content"]
             comment_creation_date = timezone.localdate()
 
-            blog.comment_set.create(
-                author=comment_author,
-                creation_date=comment_creation_date,
-                content=comment_content
-            )
+            if len(comment_content.strip()) > 0:
+                blog.comment_set.create(
+                    author=comment_author,
+                    creation_date=comment_creation_date,
+                    content=comment_content
+                )
 
         blog.save()
     else:
